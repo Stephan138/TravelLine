@@ -1,0 +1,88 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Тестирование формы логинации" verbose="1" >
+    <test name="Неверный пароль, неверный логин" >
+        <parameter name="login" value="Test32425"/>
+        <parameter name="password" value="Test123"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Неверный пароль, верный логин" >
+        <parameter name="login" value="Test32425"/>
+        <parameter name="password" value="Test7750"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Верный пароль, неверный логин" >
+        <parameter name="login" value="Test750"/>
+        <parameter name="password" value="En6-W29-SEc-sWK"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Логин введен с пробелом сначала и правильный пароль" >
+        <parameter name="login" value="  Test7750"/>
+        <parameter name="password" value="En6-W29-SEc-sWK"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Правильный логин с введенными русскими Т и е и правильный пароль" >
+        <parameter name="login" value="Теst7750"/>
+        <parameter name="password" value="En6-W29-SEc-sWK"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Логин не введен и правильный пароль пароль" >
+        <parameter name="login" value=""/>
+        <parameter name="password" value="En6-W29-SEc-sWK"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Правильный логин и не введен пароль" >
+        <parameter name="login" value="Test7750"/>
+        <parameter name="password" value=""/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Логин и пароль не введены" >
+        <parameter name="login" value=""/>
+        <parameter name="password" value=""/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Правильный логин введен на русской раскладке и правильный пароль" >
+        <parameter name="login" value="Еуые7750"/>
+        <parameter name="password" value="En6-W29-SEc-sWK"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Правильный логин и правильный пароль введен на русской раскладке" >
+        <parameter name="login" value="Test7750"/>
+        <parameter name="password" value="Ут6-Ц29-ЫУс-ыЦЛ"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Правильный логин и правильный пароль введен с пробелом в начале" >
+        <parameter name="login" value="Test7750"/>
+        <parameter name="password" value="   En6-W29-SEc-sWK"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+    <test name="Правильный логин и правильный пароль введен с пробелом в конце" >
+        <parameter name="login" value="Test7750"/>
+        <parameter name="password" value="En6-W29-SEc-sWK  "/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+</suite>
