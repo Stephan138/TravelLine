@@ -1,13 +1,112 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Тестирование формы логинации" verbose="1" >
-    <test name="Правильный логин и правильный пароль " >
+    <test name="Логин правильный и email без @" >
+        <parameter name="login" value="Tst7750"/>
+        <parameter name="email" value="Stepkorol38gmail.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="forgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Логин правильный и неправильный email" >
+        <parameter name="login" value="Tst7750"/>
+        <parameter name="email" value="Stepkorol38@.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="forgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Логин правильный и email без домена" >
+        <parameter name="login" value="Tst7750"/>
+        <parameter name="email" value="Stepkorol38@gmail"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="forgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Неправильный логин и правильный email" >
+        <parameter name="login" value="Tst7750"/>
+        <parameter name="email" value="Stepkorol38@gmail.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="forgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Правильный логин и правильный email" >
+        <parameter name="login" value="test7750"/>
+        <parameter name="email" value="Stepkorol38@gmail.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="correctforgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Логин с маленькой буквы и правильный email" >
+        <parameter name="login" value="test7750"/>
+        <parameter name="email" value="Stepkorol38@gmail.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="correctforgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Логин с пробелом в начале и правильный email" >
+        <parameter name="login" value="test7750"/>
+        <parameter name="email" value="Stepkorol38@gmail.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="correctforgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Логин с пробелом в конце и правильный email" >
+        <parameter name="login" value="Test7750   "/>
+        <parameter name="email" value="Stepkorol38@gmail.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="correctforgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Логин с буквамина русском в конце и правильный email" >
+        <parameter name="login" value="Теst7750"/>
+        <parameter name="email" value="Stepkorol38@gmail.com"/>
+        <classes>
+            <class name="LoginTest">
+                <methods>
+                    <include name="forgotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Правильный логин и правильный пароль" >
         <parameter name="login" value="Test7750"/>
         <parameter name="password" value="En6-W29-SEc-sWK"/>
         <classes>
             <class name="LoginTest">
                 <methods>
-                    <include name="CorrectLogTest"/>
+                    <include name="correctLogTest"/>
                 </methods>
             </class>
         </classes>
@@ -67,7 +166,7 @@
             </class>
         </classes>
     </test>
-    <test name="Логин не введен и правильный пароль пароль" >
+    <test name="Логин не введен и правильный пароль" >
         <parameter name="login" value=""/>
         <parameter name="password" value="En6-W29-SEc-sWK"/>
         <classes>
@@ -144,4 +243,5 @@
             </class>
         </classes>
     </test>
+
 </suite>
