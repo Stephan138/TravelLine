@@ -3,7 +3,7 @@ package LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+
 
 
 public class LoginPage{
@@ -30,21 +30,9 @@ public class LoginPage{
         return this;
     }
 
-    public LoginPage findInf(){
-        WebElement alert = driver.findElement(By.xpath("//tl-alert[@text='Неверный логин или пароль.']"));
-        Assert.assertTrue(alert.isDisplayed(), "Алерт о неправельном вводе логина или пароля не отобразился");
-        return this;
-    }
-
     public LoginPage forgotButton(){
         WebElement forgotButtonTest = driver.findElement(By.xpath("//*[@id=\"login-form\"]/div[4]/div[1]/tl-link/a/span[1]/tl-button[2]/button/span[1]/span[2]"));
         forgotButtonTest.click();
-        return this;
-    }
-
-    public LoginPage logEmailInf(){
-        WebElement alert = driver.findElement(By.xpath("//*[@id=\"forgot-password-form\"]/div[1]/div/tl-alert"));
-        Assert.assertTrue(alert.isDisplayed(), "Алерт укажите логин и связанный с ним email-адрес");
         return this;
     }
 
@@ -53,13 +41,6 @@ public class LoginPage{
         backButtonTest.click();
         return this;
     }
-
-    public LoginPage inInf(){
-        WebElement alert = driver.findElement(By.xpath("//*[@id=\"login-cont\"]/div"));
-        Assert.assertTrue(alert.isDisplayed(), "Вход в личный кабинет ");
-        return this;
-    }
-
 
     public LoginPage emailInput(String email){
         WebElement emailInput = driver.findElement(By.name("email"));
@@ -73,18 +54,6 @@ public class LoginPage{
         return this;
     }
 
-    public LoginPage wrongLogEmail(){
-        WebElement alert = driver.findElement(By.xpath("//tl-alert[@text='Неверный логин или Email.']"));
-        Assert.assertTrue(alert.isDisplayed(), "Алерт о неправельном вводе логина или Email не отобразился");
-        return this;
-    }
-
-    public LoginPage notEmailOrLogin(){
-        WebElement alert = driver.findElement(By.xpath("/html/body/div[3]/div[3]/div[3]/div/span/span[1]/span"));
-        Assert.assertTrue(alert.isDisplayed(), "О правельном вводе логина или Email не отобразился");
-        return this;
-    }
-
     public LoginPage  languageOne(String language1){
         WebElement languageOneTest = driver.findElement(By.className(language1));
         languageOneTest.click();
@@ -94,12 +63,6 @@ public class LoginPage{
     public LoginPage  languageTwo(String language2){
         WebElement languageOneTest = driver.findElement(By.className(language2));
         languageOneTest.click();
-        return this;
-    }
-
-    public LoginPage  FindLog(String text){
-        WebElement button = driver.findElement(By.className(text));
-        Assert.assertTrue(button.isDisplayed(), "Вход в личный кабинет ");
         return this;
     }
  }

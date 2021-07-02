@@ -13,28 +13,29 @@ import java.util.concurrent.TimeUnit;
 public class LoginTest {
     private WebDriver driver;
 
-    @BeforeMethod
-    public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+    @Test(description = "Проверка в браузерах")
+    @Parameters("browser")
+    public void setUp(String browser){
+        driver = getBrowser(browser);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://www.qatl.ru/secure/");
     }
 
-    @Test(description = "Проверка в браузерах")
-    @Parameters("browser")
-    public void initialization(String browser){
-        if (browser.equalsIgnoreCase("firefox")){
-            System.setProperty("webdriver.chrome.driver", "C:\\geckodriver.exe");
-            driver = new FirefoxDriver();
-            driver.get("https://www.qatl.ru/secure/");
-        } else if(browser.equalsIgnoreCase("edge")){
-            System.setProperty("webdriver.chrome.driver", "C:\\msedgedriver.exe");
-            driver = new EdgeDriver();
-            driver.get("https://www.qatl.ru/secure/");
+    public WebDriver getBrowser(String browser) {
+        if (browser.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+            return new ChromeDriver();
         }
+        if (browser.equalsIgnoreCase("edge")) {
+            System.setProperty("webdriver.edge.driver", "C:\\msedgedriver.exe");
+            return new EdgeDriver();
+        }
+        if (browser.equalsIgnoreCase("firefox")) {
+            System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+            return new FirefoxDriver();
+        }
+        return null;
     }
-
     @Test(description = "Авторизация на форме")
     @Parameters({"login", "password"})
     public void loginTest(String login, String password) {
@@ -43,8 +44,10 @@ public class LoginTest {
 
         loginPage.enterLogin(login)
                  .enterPassword(password)
-                 .tapButton()
-                 .findInf();
+                 .tapButton();
+
+        WebElement alert = driver.findElement(By.xpath("//tl-alert[@text='Неверный логин или пароль.']"));
+        Assert.assertTrue(alert.isDisplayed(), "Алерт о неправельном вводе логина или пароля не отобразился");
     }
 
 
@@ -59,8 +62,10 @@ public class LoginTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.forgotButton()
-                .logEmailInf();
+        loginPage.forgotButton();
+
+        WebElement alert = driver.findElement(By.xpath("//*[@id=\"forgot-password-form\"]/div[1]/div/tl-alert"));
+        Assert.assertTrue(alert.isDisplayed(), "Алерт укажите логин и связанный с ним email-адрес");
     }
 
     @Test(description = "Проверка работы кнопки AppStore")
@@ -81,8 +86,10 @@ public class LoginTest {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.forgotButton()
-                 .backButton()
-                 .inInf();
+                 .backButton();
+
+        WebElement alert = driver.findElement(By.xpath("//*[@id=\"login-cont\"]/div"));
+        Assert.assertTrue(alert.isDisplayed(), "Вход в личный кабинет ");
     }
 
     @Test(description = "Проверка работы кнопок с языками")
@@ -91,8 +98,10 @@ public class LoginTest {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.languageOne(language1)
-                 .languageTwo(language2)
-                 .FindLog(text);
+                 .languageTwo(language2);
+
+        WebElement button = driver.findElement(By.className(text));
+        Assert.assertTrue(button.isDisplayed(), "Вход в личный кабинет ");
     }
 
 
@@ -104,8 +113,10 @@ public class LoginTest {
         loginPage.forgotButton()
                  .enterLogin(login)
                  .emailInput(email)
-                 .hilButton()
-                 .wrongLogEmail();
+                 .hilButton();
+
+        WebElement alert = driver.findElement(By.xpath("//tl-alert[@text='Неверный логин или Email.']"));
+        Assert.assertTrue(alert.isDisplayed(), "Алерт о неправельном вводе логина или Email не отобразился");
     }
 
     @Test(description = "Проверка работы замены пароля для положительных данных")
@@ -116,9 +127,10 @@ public class LoginTest {
         loginPage.forgotButton()
                 .enterLogin(login)
                 .emailInput(email)
-                .hilButton()
-                .notEmailOrLogin();
+                .hilButton();
 
+        WebElement alert = driver.findElement(By.xpath("/html/body/div[3]/div[3]/div[3]/div/span/span[1]/span"));
+        Assert.assertTrue(alert.isDisplayed(), "О правельном вводе логина или Email не отобразился");
     }
 
 
